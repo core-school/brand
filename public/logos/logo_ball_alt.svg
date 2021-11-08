@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Artboard</title>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MonoLogo">
+            <circle id="Oval" stroke="#FFFFFF" stroke-width="2.92244263" cx="50" cy="50" r="48.5387787"></circle>
+            <circle id="Oval" fill="#FFFFFF" cx="50.1252087" cy="50.0417362" r="35.6010017"></circle>
+        </g>
+    </g>
+</svg>
