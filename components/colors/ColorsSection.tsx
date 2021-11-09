@@ -66,8 +66,8 @@ const Palette = ({ name, palette, color }) => {
 export const ColorsSection = () => {
   return (
     <div>
-      {base_colors.map(p => (
-        <Palette {...p} />
+      {base_colors.map((p, i) => (
+        <Palette key={i} {...p} />
       ))}
     </div>
   )
