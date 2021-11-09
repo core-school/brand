@@ -4,13 +4,9 @@
   <a href="https://github.com/core-school/brand/discussions">
     <img alt="Join the community on GitHub Discussions" src="https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue">
   </a>
-  <a href="https://github.com/core-school/brand/actions?query=workflow%3ATest+branch%3Amain">
-    <img alt="Build states" src="https://github.com/core-school/brand/workflows/Test/badge.svg">
-  </a>
-  <a href="#badge">
-    <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
-  </a>
 </p>
+
+![](https://api-cabled.app.faable.com/screenshot?url=https://core-brand-cards.app.faable.com/?title=Brand%20Book)
 
 ## School Highlights
 
@@ -20,3 +16,8 @@
 - React
 - Typescript frontend & backend
 - Tensorflow based machine learning curriculum
+
+## GO GO CORE
+
+- https://www.corecode.school
+- https://brand.corecode.school
