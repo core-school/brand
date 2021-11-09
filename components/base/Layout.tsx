@@ -7,8 +7,14 @@ export const Layout: React.FC = ({ children }) => {
     <div>
       <div tw="container px-4 mx-auto">
         <div tw="py-5">
-          <img src="/logos/logo_ball.svg" width={60} />
-          <h1 tw="text-2xl my-4 font-bold">CORE Code School</h1>
+          <img
+            src="/logos/logo_ball.svg"
+            width={60}
+            alt="CORE Code School Logo"
+          />
+          <h1 tw="text-2xl my-4 font-bold">
+            The Brand Book of CORE Code School
+          </h1>
           {children}
         </div>
       </div>

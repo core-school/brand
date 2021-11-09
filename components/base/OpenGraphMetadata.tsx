@@ -65,7 +65,7 @@ export const OpenGraphMetadata: React.FC<OpenGraphMetadata> = props => {
   })
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang: "en" }}>
       <title>{title}</title>
       <meta name="description" content={description} />
       <link
@@ -74,6 +74,7 @@ export const OpenGraphMetadata: React.FC<OpenGraphMetadata> = props => {
         href="/consolidated/logo_app.png"
         sizes="16x16"
       />
+      <link rel="canonical" href={base_url} />
       {/* Opengraph */}
       <meta name="title" content={title} />
       <meta property="og:title" content={title} />
