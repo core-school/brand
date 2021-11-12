@@ -6,7 +6,10 @@ import { useCopyToClipboard } from "react-use"
 const Color = ({ color, name }) => {
   const [state, copyToClipboard] = useCopyToClipboard()
   return (
-    <div tw="flex-grow-0" onClick={() => copyToClipboard(color.toUpperCase())}>
+    <div
+      tw="flex-grow-0 cursor-pointer"
+      onClick={() => copyToClipboard(color.toUpperCase())}
+    >
       <div tw="h-8 w-20 rounded" style={{ backgroundColor: color }} />
       <p tw="text-gray-400 text-xs mt-1">{color.toUpperCase()}</p>
       <p tw="text-xs">{name}</p>

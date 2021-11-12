@@ -21,8 +21,8 @@ export const Layout: React.FC = ({ children }) => {
       <div tw="bg-gray-200 text-center py-5 mt-10 px-2">
         <p>2022, CORE Code School&trade;. Madrid Spain. v{pkg.version}</p>
         <p tw="mt-2 text-gray-600">
-          Want to improve us? Submit a <b>PR</b> and contribute to be better on
-          our company mission and values via{" "}
+          Want to improve us? Submit a <b>PR</b> and contribute to our company
+          mission and values via{" "}
           <a tw="underline" href="https://github.com/core-school/brand">
             <MarkGithubIcon /> Github
           </a>

@@ -3,8 +3,7 @@ import tw from "twin.macro"
 export const WideLogo = () => {
   return (
     <>
-      <p tw="font-bold">Wide Logo</p>
-      <div tw="flex gap-2">
+      <div tw="flex flex-wrap gap-2">
         <a href="/logos/logo_core_wide.svg" download="core-logo-wide.svg">
           <div tw="bg-black rounded p-4 inline-block">
             <img src="/logos/logo_core_wide.svg" alt="logo web" />

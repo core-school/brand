@@ -35,7 +35,7 @@ const SVGCustom = forwardRef<any, { text: string; color: string }>(
         <g
           id="LogoWeb"
           stroke="none"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
           fillRule="evenodd"
         >
@@ -98,8 +98,7 @@ export const CustomizableWide = () => {
   }
 
   return (
-    <div tw="mt-5">
-      <p tw="font-bold">Custom Wide Logo</p>
+    <div>
       <input
         tw="border border-gray-300 text-lg p-2 my-2"
         value={text}
@@ -119,7 +118,7 @@ export const CustomizableWide = () => {
           ]}
         />
       </div>
-      <div tw="flex flex-col gap-2 items-start">
+      <div tw="flex flex-col gap-2 items-start overflow-scroll">
         <div tw="bg-white border border-solid border-gray-300 rounded p-4 inline-block">
           <SVGCustom text={text} color={color} ref={logo_ref} />
         </div>
