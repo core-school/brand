@@ -77,7 +77,7 @@ export const OpenGraphMetadata: React.FC<OpenGraphMetadata> = props => {
       <link rel="canonical" href={base_url} />
       {/* Opengraph */}
       <meta name="title" content={title} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content="Brand Book. Who we are, what we do." />
       <meta property="og:description" content={description} />
       <meta name="image" content={cover} />
       <meta property="og:image" content={cover} />
