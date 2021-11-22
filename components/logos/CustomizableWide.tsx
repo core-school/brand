@@ -10,7 +10,6 @@ const SVGCustom = forwardRef<any, { text: string; color: string }>(
     const [text_width, setTextWidth] = useState(0)
     useEffect(() => {
       const size = text_ref.current.getComputedTextLength()
-      console.log(size)
       setTextWidth(size + 10)
     }, [text])
     return (

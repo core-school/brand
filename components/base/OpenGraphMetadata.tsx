@@ -77,18 +77,17 @@ export const OpenGraphMetadata: React.FC<OpenGraphMetadata> = props => {
       <link rel="canonical" href={base_url} />
       {/* Opengraph */}
       <meta name="title" content={title} />
+      yarn
       <meta property="og:title" content="Brand Book. Who we are, what we do." />
       <meta property="og:description" content={description} />
       <meta name="image" content={cover} />
       <meta property="og:image" content={cover} />
       <meta property="og:image:alt" content={title} />
-
       <meta property="article:author" content={base_url} />
       <meta property="article:publisher" content={base_url} />
       <meta property="og:type" content={og_type || OG_TYPE.WEBSITE} />
       <meta property="og:site_name" content="CORE Code School" />
       <meta property="og:url" content={url} />
-
       {/* twitter card */}
       <meta name="twitter:card" content={cover} />
       <meta name="twitter:title" content={title} />

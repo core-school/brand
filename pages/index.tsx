@@ -7,6 +7,7 @@ import { LogosSection } from "../components/logos/LogosSection"
 import { Helmet } from "react-helmet"
 import { ProductSampleSection } from "../components/product/ProductSampleSection"
 import { CorporateValues } from "../components/corporate/Values"
+import { ProfilePicture } from "../components/profilepic/ProfilePicture"
 
 const IndexPage = () => {
   return (
@@ -22,10 +23,13 @@ const IndexPage = () => {
       <Section title="10. Logos">
         <LogosSection />
       </Section>
-      <Section title="11. Color Palette">
+      <Section title="11. Staff">
+        <ProfilePicture />
+      </Section>
+      <Section title="12. Color Palette">
         <ColorsSection />
       </Section>
-      <Section title="12. Product">
+      <Section title="13. Product">
         <ProductSampleSection />
       </Section>
     </>
