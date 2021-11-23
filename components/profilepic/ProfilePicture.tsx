@@ -85,7 +85,7 @@ export const ProfilePicture = () => {
               </div>
               <canvas
                 ref={canvas_ref}
-                tw="bg-white border border-solid border-gray-300 rounded p-4 inline-block cursor-pointer"
+                tw="bg-white border border-solid border-gray-300 rounded inline-block cursor-pointer"
                 style={{ width: 200, height: 200 }}
                 width={1024}
                 height={1024}

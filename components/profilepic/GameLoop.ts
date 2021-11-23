@@ -12,43 +12,75 @@ const initialize = async () => {
   return {
     selected_image: await load_image("/sample/obama.jpg"),
     image_logo: await load_image("/logos/logo_ball.svg"),
+    image_logo_alt: await load_image("/logos/logo_ball_alt.svg"),
   }
 }
 
 interface GameProps {
   size: { width: number; height: number }
   image_logo: HTMLImageElement
+  image_logo_alt: HTMLImageElement
   selected_image: HTMLImageElement
   offset: { x: number; y: number }
   selected_image_zoom: number
+  pad: number
+  background?: string
 }
 
 const loop = (ctx: CanvasRenderingContext2D, props: GameProps) => {
   const { width, height } = props.size
-  //ctx.clearRect(0, 0, width, height)
+  ctx.clearRect(0, 0, width, height)
 
   // Logo Mask
-  ctx.drawImage(props.image_logo, 0, 0, width, height)
+  ctx.save()
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = "high"
+  ctx.drawImage(
+    props.image_logo,
+    props.pad,
+    props.pad,
+    width - props.pad * 2,
+    height - props.pad * 2,
+  )
+  ctx.restore()
 
   // Male
-  ctx.globalCompositeOperation = "source-in"
   const ratio = props.selected_image.width / props.selected_image.height
   ctx.save()
+  ctx.globalCompositeOperation = "source-in"
+
   const scale = props.selected_image_zoom / 100 + 1
   ctx.translate(width / 2, height / 2)
   ctx.scale(scale, scale)
   ctx.drawImage(
     props.selected_image,
-    -(width * ratio) / 2 + props.offset.x,
-    -height / 2 + props.offset.y,
+    -(width * ratio) / 2 + props.offset.x + props.pad,
+    -height / 2 + props.offset.y + props.pad,
     width * ratio,
     height,
   )
   ctx.restore()
 
   // Overlay
+  ctx.save()
   ctx.globalCompositeOperation = "multiply"
-  ctx.drawImage(props.image_logo, 0, 0, width, height)
+  ctx.drawImage(
+    props.image_logo,
+    props.pad,
+    props.pad,
+    width - props.pad * 2,
+    height - props.pad * 2,
+  )
+  ctx.restore()
+
+  // // Background
+  // if (props.background) {
+  //   ctx.save()
+  //   ctx.globalCompositeOperation = "destination-atop"
+  //   ctx.fillStyle = props.background
+  //   ctx.fillRect(0, 0, width, height)
+  //   ctx.restore()
+  // }
 }
 
 let gameprops: Partial<GameProps> = {}
@@ -72,6 +104,8 @@ export const start_loop = async (
     selected_image_zoom: 0,
     ...(await initialize()),
     ...partialprops,
+    pad: 50,
+    background: "white",
   }
   update_props(initial_props)
 
