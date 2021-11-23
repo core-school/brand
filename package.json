@@ -8,6 +8,7 @@
     "@emotion/css": "^11.5.0",
     "@emotion/server": "^11.4.0",
     "@primer/octicons-react": "^16.1.1",
+    "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
     "html-entities": "^2.3.2",
     "lodash": "^4.17.21",

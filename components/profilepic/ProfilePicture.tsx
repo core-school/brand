@@ -1,144 +1,50 @@
 import { useEffect, useRef, useState } from "react"
 import tw from "twin.macro"
-
-/**
- * By Ken Fyrstenberg Nilsen
- *
- * drawImageProp(context, image [, x, y, width, height [,offsetX, offsetY]])
- *
- * If image and context are only arguments rectangle will equal canvas
- */
-function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
-  if (arguments.length === 2) {
-    x = y = 0
-    w = ctx.canvas.width
-    h = ctx.canvas.height
-  }
-
-  // default offset is center
-  offsetX = typeof offsetX === "number" ? offsetX : 0.5
-  offsetY = typeof offsetY === "number" ? offsetY : 0.5
-
-  // keep bounds [0.0, 1.0]
-  if (offsetX < 0) offsetX = 0
-  if (offsetY < 0) offsetY = 0
-  if (offsetX > 1) offsetX = 1
-  if (offsetY > 1) offsetY = 1
-
-  var iw = img.width,
-    ih = img.height,
-    r = Math.min(w / iw, h / ih),
-    nw = iw * r, // new prop. width
-    nh = ih * r, // new prop. height
-    cx,
-    cy,
-    cw,
-    ch,
-    ar = 1
-
-  // decide which gap to fill
-  if (nw < w) ar = w / nw
-  if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh // updated
-  nw *= ar
-  nh *= ar
-
-  // calc source rectangle
-  cw = iw / (nw / w)
-  ch = ih / (nh / h)
-
-  cx = (iw - cw) * offsetX
-  cy = (ih - ch) * offsetY
-
-  // make sure source rectangle is valid
-  if (cx < 0) cx = 0
-  if (cy < 0) cy = 0
-  if (cw > iw) cw = iw
-  if (ch > ih) ch = ih
-
-  // fill image in dest. rectangle
-  ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h)
-}
+import { get_gameprops, start_loop, update_props } from "./GameLoop"
+import download from "downloadjs"
 
 export const ProfilePicture = () => {
   const canvas_ref = useRef<HTMLCanvasElement>()
-  const [selected_image, setSelectedImage] = useState<HTMLImageElement>()
-  const [image_logo, setImageLogo] = useState<HTMLImageElement>()
-  const [offset, setOffset] = useState({ x: 0, y: 0 })
-  const [ctx, setCtx] = useState<CanvasRenderingContext2D>()
+  const [zoom, setZoom] = useState(0)
 
-  const load_image = (src): Promise<HTMLImageElement> => {
-    const img_pic = new Image()
-    img_pic.src = src
-    return new Promise(resolve => {
-      img_pic.addEventListener("load", () => {
-        resolve(img_pic)
-      })
-    })
-  }
   useEffect(() => {
-    const ctx = canvas_ref.current.getContext("2d")
-    setCtx(ctx)
-    load_image("/sample/male.jpg").then(img => setSelectedImage(img))
-    load_image("/logos/logo_ball.svg").then(img => setImageLogo(img))
+    start_loop(canvas_ref.current)
+  }, [])
 
-    //someElement.addEventListener("touchstart", process_touchstart, false)
+  useEffect(() => {
+    update_props({
+      selected_image_zoom: zoom || 0,
+    })
+  }, [zoom])
+
+  useEffect(() => {
     const element = canvas_ref.current
     let pos
-
+    let initial_offset
     element.addEventListener("mousedown", e => {
-      console.log(e)
       pos = { x: e.clientX, y: e.clientY }
+      initial_offset = get_gameprops().offset
+      console.log(get_gameprops())
     })
     element.addEventListener("mousemove", e => {
-      if (pos) {
+      if (pos && initial_offset) {
         let delta = { x: e.clientX - pos.x, y: e.clientY - pos.y }
-        console.log(delta)
-        setOffset({ x: delta.x, y: delta.y })
+
+        update_props({
+          offset: {
+            x: initial_offset.x + delta.x * 5,
+            y: initial_offset.y + delta.y * 5,
+          },
+        })
       }
+    })
+    element.addEventListener("mouseout", () => {
+      pos = null
     })
     element.addEventListener("mouseup", () => {
       pos = null
     })
-
-    // someElement.addEventListener("touchcancel", process_touchcancel, false)
-    // someElement.addEventListener("touchend", process_touchend, false)
   }, [])
-
-  const [down_link, setDownLink] = useState<string>()
-  useEffect(() => {
-    let frame_id
-    const draw = () => {
-      if (!ctx || !selected_image) return
-      const { width, height } = canvas_ref.current
-      //ctx.clearRect(0, 0, width, height)
-
-      // Logo Mask
-      ctx.drawImage(image_logo, 0, 0, width, height)
-
-      // Male
-      ctx.globalCompositeOperation = "source-in"
-      drawImageProp(
-        ctx,
-        selected_image,
-        offset.x,
-        offset.y,
-        width,
-        height,
-        0,
-        0,
-      )
-
-      // Overlay
-      ctx.globalCompositeOperation = "multiply"
-      ctx.drawImage(image_logo, 0, 0, width, height)
-      setDownLink(canvas_ref.current.toDataURL("image/png"))
-      frame_id = window.requestAnimationFrame(draw)
-    }
-    frame_id = window.requestAnimationFrame(draw)
-    return () => {
-      cancelAnimationFrame(frame_id)
-    }
-  }, [offset])
 
   return (
     <div>
@@ -156,25 +62,50 @@ export const ProfilePicture = () => {
                 const img_pic = new Image()
                 img_pic.src = fr.result as string
                 img_pic.addEventListener("load", () => {
-                  setSelectedImage(img_pic)
+                  update_props({ selected_image: img_pic })
                 })
               }
             }}
           />
           <div>
             <div tw="inline-block">
+              <div tw="text-center">
+                <input
+                  type="range"
+                  min="-50"
+                  max="100"
+                  value={zoom}
+                  onChange={e => {
+                    setZoom(parseInt(e.target.value))
+                  }}
+                />
+                <p tw="text-xs text-center text-gray-500 select-none">
+                  Drag the face to center
+                </p>
+              </div>
               <canvas
                 ref={canvas_ref}
-                tw="bg-white border border-solid border-gray-300 rounded p-4 inline-block"
+                tw="bg-white border border-solid border-gray-300 rounded p-4 inline-block cursor-pointer"
                 style={{ width: 200, height: 200 }}
                 width={1024}
                 height={1024}
               />
-              <a href={down_link} download="core-profile-512.png">
-                <p tw="text-xs text-center text-gray-500">
-                  Click to download (512px x 512px)
+              <div tw="text-center">
+                <p
+                  tw="text-center text-gray-500 cursor-pointer mt-2"
+                  onClick={() => {
+                    download(
+                      canvas_ref.current.toDataURL("image/png"),
+                      "corecodeschool-profilepic.png",
+                      "image/png",
+                    )
+                  }}
+                >
+                  Click here to download
+                  <br />
+                  <span tw="text-xs">(square 1024px x 1024px)</span>
                 </p>
-              </a>
+              </div>
             </div>
           </div>
         </div>
