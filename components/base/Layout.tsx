@@ -27,6 +27,9 @@ export const Layout: React.FC = ({ children }) => {
             <MarkGithubIcon /> Github
           </a>
         </p>
+        <p tw="pt-2 text-core">
+          <a href="https://www.corecode.school">www.corecode.school</a>
+        </p>
       </div>
     </div>
   )
