@@ -1,15 +1,21 @@
 import tw from "twin.macro"
 
+const Tit = ({ id, children }) => (
+  <a tw="block mb-2 font-bold text-lg" href={`#${id}`} id={id}>
+    {children}
+  </a>
+)
+
 export const CorporateValues = () => {
   return (
     <>
       <div tw="py-4">
-        <p tw="mb-2 font-bold">01. Our mission.</p>
+        <Tit id="mission">01. Our mission.</Tit>
         <p>Bring code closer to people by making it easy to understand.</p>
       </div>
 
       <div tw="py-4">
-        <p tw="mb-2 font-bold">02. What we do.</p>
+        <Tit id="vision">02. What we do.</Tit>
         <p>
           Teach individuals to be accountable and{" "}
           <span tw="underline">highly skilled programmers</span>.
@@ -17,7 +23,7 @@ export const CorporateValues = () => {
       </div>
 
       <div tw="py-4">
-        <p tw="mb-2 font-bold">03. Our Values</p>
+        <Tit id="values">03. Our Values</Tit>
         <ul>
           <li>
             <span tw="font-bold text-core">Integrity</span>. We strive to be
@@ -44,7 +50,7 @@ export const CorporateValues = () => {
       </div>
 
       <div tw="py-4">
-        <p tw="mb-2 font-bold">04. Value proposal.</p>
+        <Tit id="value-proposal">04. Value proposal.</Tit>
         <ul>
           <li>
             <span tw="font-bold text-core">Cloud First</span>: We teach our
@@ -71,10 +77,12 @@ export const CorporateValues = () => {
         </ul>
       </div>
       <div tw="py-4">
-        <p tw="mb-2 font-bold">05. Naming conventions.</p>
-        <pre tw="bg-gray-500 text-white rounded inline-block p-2">
-          CORE Code School
-        </pre>
+        <Tit id="naming">05. Naming conventions.</Tit>
+        <div tw="my-2">
+          <pre tw="bg-gray-500 text-white rounded inline-block p-2">
+            CORE Code School
+          </pre>
+        </div>
         <p tw="mt-2">
           Prefer using entire name <b>"CORE Code School"</b> when possible, use{" "}
           <b>"CORE"</b> as a shorter brand name. Name should always be written
@@ -82,6 +90,9 @@ export const CorporateValues = () => {
           name is used, make sure it's capitalized <b>"Code School"</b>. Avoid
           use capitalization for entire name.{" "}
         </p>
+
+        <p tw="mt-4 mb-2 font-bold">Pronunciation [es-ES]</p>
+        <audio src="/media/pronunciacion_core.m4a" controls></audio>
       </div>
     </>
   )
