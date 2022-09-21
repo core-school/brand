@@ -49,7 +49,7 @@ export const ProfilePicture = () => {
   return (
     <div>
       <div tw="py-4">
-        <p tw="mb-2 font-bold">111. Profile Picture</p>
+        <p tw="mb-2 font-bold">03.1. Profile Picture</p>
         <div tw="flex flex-col gap-4">
           <input
             type="file"

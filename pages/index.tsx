@@ -1,35 +1,32 @@
-import { Children } from "react"
 import tw, { theme } from "twin.macro"
 
 import { ColorsSection } from "../components/colors/ColorsSection"
 import { Section } from "../components/base/Section"
 import { LogosSection } from "../components/logos/LogosSection"
-import { Helmet } from "react-helmet"
 import { ProductSampleSection } from "../components/product/ProductSampleSection"
 import { CorporateValues } from "../components/corporate/Values"
 import { ProfilePicture } from "../components/profilepic/ProfilePicture"
+import { MainValue } from "../components/corporate/MainValue"
+import { CoverImage } from "../components/base/Cover"
 
 const IndexPage = () => {
   return (
     <>
-      <Helmet
-        title="Brand Book | CORE Code School"
-        meta={[{ property: "og:title", content: "Brand Book" }]}
-      />
-      <Section title="00. Corporative Identity">
+      <CoverImage title="Brand Book" />
+      <MainValue />
+      <Section number="01." title="Corporate Identity">
         <CorporateValues />
       </Section>
-      <p tw="text-gray-500 text-xl mt-10">Brand Book</p>
-      <Section title="10. Logos">
+      <Section number="02." title="Logos">
         <LogosSection />
       </Section>
-      <Section title="11. Staff">
+      <Section number="03." title="Staff">
         <ProfilePicture />
       </Section>
-      <Section title="12. Color Palette">
+      <Section number="04." title="Colors">
         <ColorsSection />
       </Section>
-      <Section title="13. Product">
+      <Section number="05." title="Product">
         <ProductSampleSection />
       </Section>
     </>

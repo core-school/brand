@@ -10,12 +10,7 @@ export const CorporateValues = () => {
   return (
     <>
       <div tw="py-4">
-        <Tit id="mission">01. Our mission.</Tit>
-        <p>Bring code closer to people by making it easy to understand.</p>
-      </div>
-
-      <div tw="py-4">
-        <Tit id="vision">02. What we do.</Tit>
+        <Tit id="vision">01.1. What we do.</Tit>
         <p>
           Teach individuals to be accountable and{" "}
           <span tw="underline">highly skilled programmers</span>.
@@ -23,7 +18,7 @@ export const CorporateValues = () => {
       </div>
 
       <div tw="py-4">
-        <Tit id="values">03. Our Values</Tit>
+        <Tit id="values">01.2. Our Values</Tit>
         <ul>
           <li>
             <span tw="font-bold text-core">Integrity</span>. We strive to be
@@ -50,7 +45,7 @@ export const CorporateValues = () => {
       </div>
 
       <div tw="py-4">
-        <Tit id="value-proposal">04. Value proposal.</Tit>
+        <Tit id="value-proposal">01.3. Value proposal.</Tit>
         <ul>
           <li>
             <span tw="font-bold text-core">Cloud First</span>: We teach our
@@ -77,7 +72,7 @@ export const CorporateValues = () => {
         </ul>
       </div>
       <div tw="py-4">
-        <Tit id="naming">05. Naming conventions.</Tit>
+        <Tit id="naming">01.4. Naming conventions.</Tit>
         <div tw="my-2">
           <pre tw="bg-gray-500 text-white rounded inline-block p-2">
             CORE Code School

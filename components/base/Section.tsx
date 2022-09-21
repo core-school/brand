@@ -1,11 +1,17 @@
-import tw from "twin.macro"
-
-export const Section: React.FC<{ title?: string }> = ({ title, children }) => {
+export const Section: React.FC<{ title?: string; number?: string }> = ({
+  title,
+  number,
+  children,
+}) => {
   return (
     <section tw="py-2">
-      <h2 tw="font-bold text-gray-700">{title}</h2>
-      <div tw="h-0.5 bg-gray-300 mb-3 mt-1" />
-      {children}
+      <div tw="bg-core-200 mb-10 mt-20 py-20">
+        <div tw="container px-4 mx-auto">
+          <p tw="text-gray-400 text-2xl font-mono">{number}</p>
+          <h2 tw="font-bold text-core text-5xl uppercase">{title}</h2>
+        </div>
+      </div>
+      <div tw="container px-4 mx-auto">{children}</div>
     </section>
   )
 }
