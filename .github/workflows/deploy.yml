@@ -1,14 +1,21 @@
-name: FaableCloud Deploy
+name: Deploy to Faable
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+env:
+  FAABLE_APIKEY: ${{ secrets.FAABLE_APIKEY }}
 jobs:
-  deploy-to-faable:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: faablecloud/action-deploy@main
+      - name: Prepare CLI
+        run: npm i -g @faable/faable
+      - uses: actions/setup-node@v3
         with:
-          faable_app_name: "brand"
-          faable_api_key: ${{ secrets.FAABLE_API_KEY }}
-          faable_user: "core"
+          node-version: "18"
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - name: Deploy to Faable
+        run: faable deploy brand
